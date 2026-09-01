@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060b14">
+<title>ZyrexSMP — Live Minecraft Server</title>
+<meta name="description" content="ZyrexSMP live server dashboard, players, leaderboards, achievements and server performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+
+<header class="topbar">
+  <a class="brand" href="#home"><span class="brand-logo">Z</span><span>Zyrex<span class="dim">SMP</span></span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+  <nav id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#players">Players</a>
+    <a href="#leaderboard">Leaderboard</a>
+    <a href="#achievements">Achievement</a>
+    <a href="#activity">Join / Leave</a>
+    <a href="#shop">Shop</a>
+    <a href="#server-info">Server Info</a>
+  </nav>
+  <div class="top-status"><i></i><span id="navStatus">ONLINE</span></div>
+</header>
+
+<main>
+<section id="home" class="hero wrap">
+  <div>
+    <div class="eyebrow"><i class="dot"></i> LIVE JAVA MINECRAFT SERVER</div>
+    <h1>Survive.<br><span>Build. Compete.</span></h1>
+    <p class="hero-text">ZyrexSMP is a competitive survival experience built around progression, economy, PvP and community.</p>
+    <div class="hero-actions">
+      <button class="btn primary" id="copyJava">Copy Java IP</button>
+      <a class="btn secondary" href="#server-info">Server Info</a>
+    </div>
+    <div class="mini-links">
+      <a href="https://discord.gg/x2BHcNba2R" target="_blank" rel="noopener">Discord ↗</a>
+      <a href="https://www.tiktok.com/@kingbrezz" target="_blank" rel="noopener">TikTok ↗</a>
+    </div>
+  </div>
+
+  <aside class="hero-panel glass">
+    <div class="panel-head"><span>SERVER STATUS</span><b class="live"><i></i> LIVE</b></div>
+    <div class="server-title">ZyrexSMP</div>
+    <div class="server-address">zyrexsmp.xyz:5066</div>
+    <div class="hero-metrics">
+      <div><strong id="heroPlayers">—</strong><small>Players</small></div>
+      <div><strong id="heroTps">—</strong><small>TPS</small></div>
+      <div><strong id="heroMspt">—</strong><small>MSPT</small></div>
+    </div>
+    <div class="progress"><span id="playerBar"></span></div>
+    <div class="updated">Updated <span id="updated">—</span></div>
+  </aside>
+</section>
+
+<section id="server-info" class="section wrap">
+  <div class="section-heading"><div><div class="eyebrow">SERVER INFO</div><h2>Everything at a glance</h2></div><span class="api-pill"><i></i> API <b id="apiState">ONLINE</b></span></div>
+  <div class="server-grid">
+    <article class="info-card glass"><span>STATUS</span><strong id="serverStatus">ONLINE</strong><small id="serverHint">Realtime connection active</small></article>
+    <article class="info-card glass"><span>PLAYERS</span><strong id="metricPlayers">—</strong><small>online now</small></article>
+    <article class="info-card glass"><span>TPS</span><strong id="metricTps">—</strong><small>ticks per second</small></article>
+    <article class="info-card glass"><span>MSPT</span><strong id="metricMspt">—</strong><small>milliseconds per tick</small></article>
+  </div>
+  <div class="connect-card glass">
+    <div><div class="eyebrow">JAVA EDITION</div><h3>zyrexsmp.xyz:5066</h3><p>Java server · Paper · Live API</p></div>
+    <button class="btn secondary small" data-copy="zyrexsmp.xyz:5066">COPY IP</button>
+  </div>
+</section>
+
+<section id="players" class="section wrap">
+  <div class="section-heading"><div><div class="eyebrow">PLAYERS</div><h2>Players online</h2></div><span class="count-pill" id="playerCount">0 online</span></div>
+  <div class="player-tools">
+    <input id="playerSearch" type="search" placeholder="Search online players..." autocomplete="off">
+    <button class="btn secondary small" id="refreshPlayers">Refresh</button>
+  </div>
+  <div id="playerGrid" class="player-grid"><div class="empty glass">Loading players…</div></div>
+</section>
+
+<section id="leaderboard" class="section wrap">
+  <div class="section-heading"><div><div class="eyebrow">RANKINGS</div><h2>Leaderboards</h2></div><button class="btn secondary small" id="refreshBoards">Refresh</button></div>
+  <div class="tabs">
+    <button class="tab active" data-board="baltop">Baltop</button>
+    <button class="tab" data-board="shards">Top Shards</button>
+    <button class="tab" data-board="pvp">PvP</button>
+  </div>
+  <div class="table-card glass">
+    <table><thead><tr><th>#</th><th>Player</th><th>Value</th></tr></thead><tbody id="leaderRows"><tr><td colspan="3">Loading…</td></tr></tbody></table>
+  </div>
+  <p class="api-note" id="boardNote"></p>
+</section>
+
+<section id="achievements" class="section wrap">
+  <div class="section-heading"><div><div class="eyebrow">MILESTONES</div><h2>Recent achievements</h2></div><button class="btn secondary small" id="refreshAchievements">Refresh</button></div>
+  <div id="achievementGrid" class="achievement-grid"><div class="empty glass">Loading achievements…</div></div>
+</section>
+
+<section id="activity" class="section wrap">
+  <div class="section-heading"><div><div class="eyebrow">REALTIME ACTIVITY</div><h2>Join / Leave</h2></div><span class="api-pill"><i></i> LIVE</span></div>
+  <div class="activity-card glass">
+    <div class="activity-head"><span>Player activity</span><span id="activityState">Connecting…</span></div>
+    <div id="activityList" class="activity-list"><div class="empty">Waiting for realtime events…</div></div>
+  </div>
+</section>
+
+<section id="shop" class="section wrap">
+  <div class="shop-card glass">
+    <div class="shop-icon">✦</div>
+    <div><div class="eyebrow">ZYREX STORE</div><h2>Shop is cooking.</h2><p>Ranks, cosmetics and server items can live here when your store is ready.</p></div>
+    <span class="coming">COMING SOON</span>
+  </div>
+</section>
+
+<section class="section wrap community">
+  <div><div class="eyebrow">COMMUNITY</div><h2>Join ZyrexSMP.</h2><p>Play, compete and stay connected with the community.</p></div>
+  <div class="hero-actions"><a class="btn primary" href="https://discord.gg/x2BHcNba2R" target="_blank" rel="noopener">Join Discord</a><a class="btn secondary" href="https://www.tiktok.com/@kingbrezz" target="_blank" rel="noopener">Developer TikTok</a></div>
+</section>
+</main>
+
+
+
+<div class="modal" id="playerModal" aria-hidden="true">
+  <div class="modal-card glass">
+    <button class="modal-close" id="playerModalClose" aria-label="Close">×</button>
+    <div id="playerModalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast">Done</div>
+<footer class="wrap"><span>© 2026 ZyrexSMP</span><span>Powered by ZyrexWebAPI · <b id="footerApi">online</b></span></footer>
+<script src="app.js" defer></script>
+</body>
+</html>
